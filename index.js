@@ -19,11 +19,14 @@ const server = http.createServer(function(req, res) {
   const path = parsedUrl.pathname;
   const trimmedPath = path.replace(/^\/+|\/+$/g,'')
 
-  //Get the query string as object
+  // Get the query string as object
   const queryStringObject = parsedUrl.query;
 
   // Get the HTTP Method
   const method = req.method.toLowerCase();
+
+  // Get the headers as an objects
+  const headers = req.headers;
 
   // Send the response
   res.end('Hello world \n');
@@ -31,6 +34,8 @@ const server = http.createServer(function(req, res) {
   // Log the request path
   console.log(`Request received on path: ${trimmedPath} with method: ${method} and with theese query string parameters: `)
   console.log(queryStringObject)
+  console.log('Request received with these headers')
+  console.log(headers)
 
 })
 
