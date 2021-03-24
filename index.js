@@ -41,10 +41,10 @@ httpsServer.listen(config.httpsPort, function () {
 // Define the handlers
 const handlers = {};
 
-// Sample handler
-handlers.sample = function(data, callback){
+// Ping handler
+handlers.ping = function(data, callback){
   // Callback a http status code, and a payload object
-  callback(406, {name:'sample handler'})
+  callback(200)
 };
 
 // Not found handler
@@ -55,7 +55,7 @@ handlers.notFound = function(data, callback) {
 
 // Define a request router
 const router = {
-  'sample': handlers.sample
+  'ping': handlers.ping
 }
 
 // All the server logic for both the http and https server
