@@ -39,7 +39,7 @@ const server = http.createServer(function (req, res) {
     buffer += decoder.end();
 
     // Log the request path
-    console.log(`Request received on path: ${trimmedPath} with method: ${method} and with theese query string parameters: `)
+    console.log(`Request received on path: ${trimmedPath} with method: ${method} and with these query string parameters: `)
     console.log(queryStringObject)
     console.log('Request received with these headers')
     console.log(headers)
@@ -47,9 +47,10 @@ const server = http.createServer(function (req, res) {
   });
 
   // Choose the handler the request should go to. If no one found choose notFound handler.
-  const chosenHandler = typeof(router[trimmedPath]) !== undefined
+
+  const chosenHandler = typeof(router[trimmedPath]) !== 'undefined'
     ? router[trimmedPath]
-    : router.notFound;
+    : handlers.notFound;
 
   //  Construct data object to send to the handler
   const data = {
@@ -73,11 +74,12 @@ const server = http.createServer(function (req, res) {
       : {}
 
     //  Convert the payload to a string
-    const paylodString = JSON.stringify(payload);
+    const payloadString = JSON.stringify(payload);
 
-    // Return the responce
+    // Return the response
+    resx.setHeader('Content-Type', 'application/json')
     res.writeHead(statusCode);
-    res.end(paylodString);
+    res.end(payloadString);
 
   })
 })
